@@ -1,0 +1,1 @@
+curl -X GET -s -k -u admin:redhat https://satellite.redhat.com/katello/api/v2/systems/

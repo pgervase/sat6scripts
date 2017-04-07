@@ -1,0 +1,1 @@
+curl -X GET -s -k -u admin:redhat -H "Accept:application/json" --cacert katello-server-ca.crt https://satelite.redhat.com/katello/api/v2/systems/85907377-bbfc-ad
