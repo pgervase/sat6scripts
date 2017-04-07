@@ -20,9 +20,9 @@ chomp($pass = <STDIN>);
 system('stty echo');
 print "\n";
 =cut
-my $host = "prod.usersys.redhat.com";
+my $host = "satellite.redhat.com";
 my $user = "admin";
-my $pass = "redhat";
+my $pass = "xxxxxx";
 
 my $ua = LWP::UserAgent->new();
 $ua->agent('Mozilla');
