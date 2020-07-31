@@ -1,5 +1,5 @@
 - name: test doing lifecycle from tower
-  hosts: localhost
+  hosts: "{{ server_url }}"
   vars:
     activation_key: rhel-via-tower
     lifecycle_env: test-via-tower
