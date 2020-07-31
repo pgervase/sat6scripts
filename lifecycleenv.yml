@@ -1,11 +1,16 @@
-- hosts: localhost
+- name: test doing lifecycle from tower
+  hosts: localhost
   vars:
-    activation_key: rhel
-    lifecycle_env: Test
-    content_view: RHEL
+    activation_key: rhel-via-tower
+    lifecycle_env: test-via-tower
+    content_view: rhel-via-tower
     subscriptions:
-      - name: "Red Hat Enterprise Linux"
-    organization: opendemo
+      - name: "Red Hat Enterprise Virtualization for Servers, Premium (4000 Sockets)"
+    organization: opendemoorg
+    server_url:
+    username:
+    password:
+
   tasks:
     - name: "Create {{ lifecycle_env }} LCE"
       redhat.satellite.lifecycle_environment:
@@ -13,6 +18,30 @@
         prior: "Library"
         organization: "{{ organization }}"
         state: present
+        server_url: "{{ server_url }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+    - name: "Create content view {{ content_view }} "
+      redhat.satellite.content_view:
+        name: "{{ content_view }}"
+        organization: "{{ organization }}"
+        repositories:  
+          - name: 'Red Hat Satellite Maintenance 6 for RHEL 7 Server RPMs x86_64'
+            product: 'Red Hat Enterprise Linux Server'
+        server_url: "{{ server_url }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+
+    - name: "Put the cv I just made into the {{ lifecycle_env }} lifecycle"
+      redhat.satellite.content_view_version:
+        server_url: "{{ server_url }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        content_view: "{{ content_view }}"
+        organization: "{{ organization }}"
+        lifecycle_environments: "{{ lifecycle_env }}"
+
     
     - name: "Create {{ activation_key }}-{{ lifecycle_env }} Activation Key"
       redhat.satellite.activation_key:
@@ -22,3 +51,6 @@
         subscriptions: "{{ subscriptions }}"
         organization: "{{ organization }}"
         state: present
+        server_url: "{{ server_url }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
