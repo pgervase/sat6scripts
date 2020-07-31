@@ -8,7 +8,7 @@
     organization: opendemo
   tasks:
     - name: "Create {{ lifecycle_env }} LCE"
-      redhat.satellitelifecycle_environment:
+      redhat.satellite.lifecycle_environment:
         name: "{{ lifecycle_env }}"
         prior: "Library"
         organization: "{{ organization }}"
