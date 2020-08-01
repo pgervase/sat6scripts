@@ -1,9 +1,9 @@
 - name: test doing lifecycle from tower
   hosts: "{{ server }}"
   vars:
-    activation_key: rhel-via-tower
-    lifecycle_env: test-via-tower
-    content_view: rhel-via-tower
+    activation_key: rhelAK-via-tower
+    lifecycle_env: testLC-via-tower
+    content_view: rhelCV-via-tower
     subscriptions:
       - name: "Red Hat Enterprise Virtualization for Servers, Premium (4000 Sockets)"
     organization: opendemoorg
